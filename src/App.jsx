@@ -1,3 +1,5 @@
+import { AuthProvider } from "./context/AuthContext"
+import AppRoutes from "./routes/AppRoutes"
 
 
 function App() {
@@ -5,7 +7,9 @@ function App() {
 
   return (
     <>
-      <h1>Deployment Tracking</h1>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
     </>
   )
 }
