@@ -16,3 +16,7 @@ export const createClient = async (data) => {
 
 };
 
+export const fetchClientsWithStats = async () => {
+  const res = await api.get("/dashboard/clients");
+  return res.data;
+};
