@@ -109,7 +109,7 @@ function ClientCard({ client, viewMode = "grid" }) {
   const isGrid = viewMode === "grid";
 
   const openClient = () => {
-    navigate(`/client/${client._id}`);
+    navigate(`/client/${client.id}`);
   };
 
   return (

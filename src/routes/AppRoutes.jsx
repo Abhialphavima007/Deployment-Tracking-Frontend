@@ -6,6 +6,7 @@ import RegisterPage from "../pages/RegisterPage";
 
 import ProtectedRoute from "./ProtectedRoutes";
 import DashboardPage from "../pages/Dashboard";
+import ClientKanbanPage from "../pages/ClientKanbanPage";
 
 function AppRoutes() {
 
@@ -27,6 +28,17 @@ function AppRoutes() {
           element={
             <ProtectedRoute>
               <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* CLIENT KANBAN BOARD */}
+
+        <Route
+          path="/client/:clientId"
+          element={
+            <ProtectedRoute>
+              <ClientKanbanPage />
             </ProtectedRoute>
           }
         />

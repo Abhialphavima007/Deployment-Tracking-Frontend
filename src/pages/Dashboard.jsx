@@ -248,7 +248,7 @@ function DashboardPage() {
             </div>
 
             {/* Search - Desktop */}
-            <div className="relative hidden md:block max-w-md">
+            <div className="relative hidden w-87.5 md:block max-w-md">
               <svg
                 className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 transform -translate-y-1/2"
                 fill="none"
