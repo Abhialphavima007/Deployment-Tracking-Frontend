@@ -281,7 +281,7 @@ function DashboardPage() {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-3 text-sm">
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl flex items-center justify-center text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow duration-200">
-                  {user.name.charAt(0).toUpperCase()}
+                  {user.name.charAt(0).toUpperCase()} 
                 </div>
                 <div className="hidden md:block">
                   <p className="font-semibold text-gray-900 leading-tight">
