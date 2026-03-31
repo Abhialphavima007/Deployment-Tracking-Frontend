@@ -270,6 +270,12 @@ function DashboardPage() {
                 className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white shadow-sm"
               />
             </div>
+            {user.role === "admin" && (
+              <button
+                onClick={() => navigate("/admin")}
+                className="ml-4 px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-all duration-200 flex items-center gap-2.5 shadow-sm hover:shadow-md whitespace-nowrap border border-blue-700 hover:border-blue-800"
+                >Admin Panel</button>
+            )}
 
             {/* User Profile & Logout */}
             <div className="flex items-center gap-4">
