@@ -1,4 +1,4 @@
-import { getClients } from "../services/clientService.js";
+import { createClient, getClients, updateClient, deleteClient1 } from "../services/clientService.js";
 import { fetchClientsWithStats } from "../services/clientService";
 
 export const fetchClients = async () => {
@@ -34,3 +34,32 @@ export const getClientsWithStats = async () => {
   }
 
 };
+
+
+// Save client (create or update)
+export const saveClient = async (form, editingClient) =>{
+  try {
+    if (editingClient) {
+      await updateClient(editingClient._id, form);
+    } else {
+      await createClient(form);
+    }
+    return true;
+
+  } catch (error) {
+    console.error("Error saving client", error);
+    return false;
+  }
+}
+
+// Delete Client
+export const deleteClient =async (clientId)=>{
+  try{
+    await deleteClient1(clientId);
+    return true;
+  }catch(err){
+    console.error("Error deleting client: ",err);
+    return false;
+  }
+}
+

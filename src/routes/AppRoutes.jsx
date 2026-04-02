@@ -8,15 +8,13 @@ import DashboardPage from "../pages/Dashboard";
 import ClientKanbanPage from "../pages/ClientKanbanPage";
 import AdminRoute from "./AdminRoute";
 import AdminDashboardPage from "../pages/AdminDashboard";
+import ManageClientsPage from "../pages/ManageClientPage";
+
 
 function AppRoutes() {
-
   return (
-
     <BrowserRouter>
-
       <Routes>
-
         {/* PUBLIC ROUTES */}
 
         <Route path="/" element={<LoginPage />} />
@@ -45,7 +43,7 @@ function AppRoutes() {
         />
 
         {/* ADMIN ROUTES - LAZY LOADED */}
-        <Route 
+        <Route
           path="/admin"
           element={
             <AdminRoute>
@@ -54,10 +52,16 @@ function AppRoutes() {
           }
         />
 
+        <Route
+          path="/admin/clients"
+          element={
+            <AdminRoute>
+              <ManageClientsPage />
+            </AdminRoute>
+          }
+        />
       </Routes>
-
     </BrowserRouter>
-
   );
 }
 
