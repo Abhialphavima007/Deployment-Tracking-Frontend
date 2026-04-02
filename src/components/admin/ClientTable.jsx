@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 
 function ClientTable({ clients, onEdit, onDelete }) {
+  const navigate = useNavigate();
 
   return (
 
@@ -38,6 +40,13 @@ function ClientTable({ clients, onEdit, onDelete }) {
                   className="text-red-600"
                 >
                   Delete
+                </button>
+
+                <button
+                  onClick={() => navigate(`/admin/clients/${client._id}/logs`)}
+                  className="text-green-600"
+                >
+                  View Logs
                 </button>
 
               </td>

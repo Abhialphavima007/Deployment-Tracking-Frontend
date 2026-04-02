@@ -9,7 +9,10 @@ import ClientKanbanPage from "../pages/ClientKanbanPage";
 import AdminRoute from "./AdminRoute";
 import AdminDashboardPage from "../pages/AdminDashboard";
 import ManageClientsPage from "../pages/ManageClientPage";
-
+import AdminAllLogsPage from "../pages/AdminAllLogsPage";
+import ClientLogsPage from "../pages/ClientLogsPage";
+import SpecificDeploymentLogsPage from "../pages/SpecificDeploymentLogsPage";
+import StatusClientsPage from "../pages/StatusClientsPage";
 
 function AppRoutes() {
   return (
@@ -60,6 +63,43 @@ function AppRoutes() {
             </AdminRoute>
           }
         />
+
+        <Route
+          path="/admin/status"
+          element={
+            <AdminRoute>
+              <StatusClientsPage />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/logs"
+          element={
+            <AdminRoute>
+              <AdminAllLogsPage />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/clients/:clientId/logs"
+          element={
+            <AdminRoute>
+              <ClientLogsPage />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/deployments/:deploymentId/logs"
+          element={
+            <AdminRoute>
+              <SpecificDeploymentLogsPage />
+            </AdminRoute>
+          }
+        />
+
       </Routes>
     </BrowserRouter>
   );

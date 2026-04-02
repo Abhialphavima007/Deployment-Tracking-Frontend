@@ -5,7 +5,8 @@ function Sidebar() {
   const menu = [
     { name: "Dashboard", path: "/admin" },
     { name: "Clients", path: "/admin/clients" },
-    { name: "Status", path: "/admin/status" }
+    { name: "Status", path: "/admin/status" },
+    { name: "All Logs", path: "/admin/logs" }
   ];
 
   return (
