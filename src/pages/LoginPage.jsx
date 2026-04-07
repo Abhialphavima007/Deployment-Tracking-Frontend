@@ -20,7 +20,9 @@ import { useNavigate } from "react-router-dom";
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -36,10 +38,18 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
     try {
       const data = await loginUser({ email, password });
       login(data);
       navigate("/dashboard");
+    } catch (err) {
+      // Try to extract error message from backend response
+      let msg = "Login failed. Please check your credentials.";
+      if (err.response && err.response.data && err.response.data.message) {
+        msg = err.response.data.message;
+      }
+      setError(msg);
     } finally {
       setIsLoading(false);
     }
@@ -225,35 +235,6 @@ function LoginPage() {
           </div>
         </div>
 
-        {/* ── Bottom stats ── */}
-        <div
-          className="relative z-10 flex items-center gap-6 pt-6"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
-        >
-          {[
-            { num: "98.9%", label: "Uptime SLA" },
-            { num: "2.4k+", label: "Apps tracked" },
-            { num: "340", label: "Organizations" },
-          ].map((s, i) => (
-            <div key={s.label} className="flex items-center gap-6">
-              {i > 0 && (
-                <div
-                  className="w-px h-8"
-                  style={{ background: "rgba(255,255,255,0.1)" }}
-                />
-              )}
-              <div>
-                <div className="text-lg font-bold text-white">{s.num}</div>
-                <div
-                  className="text-[10px] uppercase tracking-widest"
-                  style={{ color: "#64748b" }}
-                >
-                  {s.label}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
 
       {/* ═══════════════════════════════════════════
@@ -320,6 +301,20 @@ function LoginPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
+            {error && (
+              <div className="mb-2 text-red-600 text-sm font-semibold bg-red-50 border border-red-200 rounded px-3 py-2 flex items-center justify-between gap-2">
+                <span>{error}</span>
+                <button
+                  type="button"
+                  aria-label="Close error"
+                  className="ml-2 text-red-400 hover:text-red-700 font-bold text-lg leading-none"
+                  onClick={() => setError("")}
+                  style={{ lineHeight: 1 }}
+                >
+                  ×
+                </button>
+              </div>
+            )}
             {/* Email */}
             <div>
               <label
@@ -402,7 +397,7 @@ function LoginPage() {
                   </svg>
                 </span>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -425,6 +420,23 @@ function LoginPage() {
                     e.target.style.boxShadow = "none";
                   }}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                >
+                  {showPassword ? (
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                      <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>
+                  ) : (
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  )}
+                </button>
               </div>
             </div>
 
@@ -563,7 +575,7 @@ function LoginPage() {
           </p>
 
           {/* Trust badges */}
-          <div
+          {/* <div
             className="flex items-center justify-center gap-4 mt-8 pt-6"
             style={{ borderTop: "1px solid #f1f5f9" }}
           >
@@ -589,7 +601,7 @@ function LoginPage() {
                 </span>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
 

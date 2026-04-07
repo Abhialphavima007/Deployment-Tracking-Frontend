@@ -4,7 +4,7 @@ function ClientModal({ form, setForm, onClose, onSave, editingClient }) {
 
   return (
 
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+    <div className="fixed inset-0 z-40 bg-black/70 transition-opacity flex items-center justify-center">
 
       <div className="bg-white p-6 rounded-xl w-96">
 

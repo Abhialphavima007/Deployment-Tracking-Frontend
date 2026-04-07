@@ -54,39 +54,43 @@ function ManageClientsPage() {
   };
 
   return (
-
     <AdminLayout>
-
-      <div className="flex justify-between items-center mb-6">
-
-        <h2 className="text-2xl font-bold">Clients</h2>
-
-        <button
-          onClick={() => {
-            setEditingClient(null);
-            setForm({ name: "", description: "" });
-            setShowModal(true);
-          }}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-        >
-          + Add Client
-        </button>
-
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Clients Management</h2>
+            <p className="text-sm text-gray-500 mt-1">Add, edit, or remove clients tracking deployments.</p>
+          </div>
+          <button
+            onClick={() => {
+              setEditingClient(null);
+              setForm({ name: "", description: "" });
+              setShowModal(true);
+            }}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2.5 rounded-xl transition-all duration-200 shadow-sm shadow-blue-500/30 flex items-center gap-2"
+          >
+            <span className="text-lg leading-none">+</span> Add Client
+          </button>
+        </div>
       </div>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <ClientTable
-          clients={clients}
-          onEdit={(client) => {
-            setEditingClient(client);
-            setForm(client);
-            setShowModal(true);
-          }}
-          onDelete={handleDelete}
-        />
-      )}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        {loading ? (
+          <div className="flex justify-center p-12">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          </div>
+        ) : (
+          <ClientTable
+            clients={clients}
+            onEdit={(client) => {
+              setEditingClient(client);
+              setForm(client);
+              setShowModal(true);
+            }}
+            onDelete={handleDelete}
+          />
+        )}
+      </div>
 
       {showModal && (
         <ClientModal
@@ -97,9 +101,7 @@ function ManageClientsPage() {
           editingClient={editingClient}
         />
       )}
-
     </AdminLayout>
-
   );
 
 }
